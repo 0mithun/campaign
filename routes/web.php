@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CampaignController;
 use App\Http\Controllers\TemplateController;
+use App\Http\Controllers\UserEmailSettingController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,6 +27,9 @@ Route::middleware(['auth'])->group(function () {
 
     Route::resource('templates', TemplateController::class);
     Route::resource('campaigns', CampaignController::class);
+
+    Route::get('email-setting',[UserEmailSettingController::class, 'edit'])->name('email.setting.edit');
+    Route::put('email-setting', [UserEmailSettingController::class, 'update'])->name('email.setting.update');
 
 });
 
