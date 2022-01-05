@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CampaignController;
 use App\Http\Controllers\TemplateController;
 use Illuminate\Support\Facades\Route;
 
@@ -24,6 +25,7 @@ Route::middleware(['auth'])->group(function () {
     Route::redirect('/home', 'templates', 301)->name('home');
 
     Route::resource('templates', TemplateController::class);
+    Route::resource('campaigns', CampaignController::class);
 
 });
 

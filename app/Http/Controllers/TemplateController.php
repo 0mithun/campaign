@@ -79,7 +79,7 @@ class TemplateController extends Controller
     {
         $this->authorize('update', $template);
 
-        $template->update($request->validated());
+        $template->update($request->except('user_id'));
 
         return redirect()->route('templates.index')->with('success','Template update successfully!');
     }
