@@ -9,8 +9,6 @@ Clone the repo
 - Run `cp .env.example .env`
 - Run `php artisan key:generate`
 - Set your database configration to .env
-- If your machine don't have redis server install it. 
-- set brodcast drive to redis
 - Run `php artisan migrate --seed`
 
 
