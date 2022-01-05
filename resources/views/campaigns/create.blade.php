@@ -39,7 +39,7 @@
                         </div>
                     </div>
                     <div class="row mb-3">
-                        <label for="times" class="col-md-2 col-form-label text-md-end">{{ __('Interval Times') }}</label>
+                        <label for="times" class="col-md-2 col-form-label text-md-end">{{ __('Times') }}</label>
                         <div class="col-md-8">
                             <input id="times" type="number" min="1" class="form-control @error('times') is-invalid @enderror" name="times" value="{{ old('times', 1) }}" >
                             @error('times')
