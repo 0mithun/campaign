@@ -24,6 +24,7 @@ class StoreTemplateRequest extends FormRequest
     public function rules()
     {
         return [
+            'name'       =>  ['required',],
             'subject'       =>  ['required',],
             'body'          =>  ['required','min:20']
         ];

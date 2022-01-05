@@ -16,6 +16,7 @@ class CreateTemplatesTable extends Migration
         Schema::create('templates', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained();
+            $table->string('name');
             $table->string('subject');
             $table->text('body');
             $table->timestamps();

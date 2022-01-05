@@ -15,7 +15,7 @@ class TemplateController extends Controller
      */
     public function index()
     {
-        $templates = Template::paginate(10);
+        $templates = Template::where('user_id', auth()->id())->paginate(10);
         return view('home', compact('templates'));
     }
 
@@ -50,6 +50,8 @@ class TemplateController extends Controller
      */
     public function show(Template $template)
     {
+        $this->authorize('view', $template);
+
         return view('templates.show', compact('template'));
     }
 
@@ -61,6 +63,8 @@ class TemplateController extends Controller
      */
     public function edit(Template $template)
     {
+        $this->authorize('update', $template);
+
         return view('templates.edit', compact('template'));
     }
 

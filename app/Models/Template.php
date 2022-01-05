@@ -10,7 +10,7 @@ class Template extends Model
     use HasFactory;
 
     protected $fillable = [
-        'subject', 'body', 'user_id'
+        'name', 'subject', 'body', 'user_id'
     ];
 
 

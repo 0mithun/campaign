@@ -16,6 +16,7 @@ class TemplateFactory extends Factory
     {
         return [
             'user_id'   => User::inRandomOrder()->first()->id,
+            'name'   =>  $this->faker->name,
             'subject'   =>  $this->faker->sentence(3),
             'body'      =>  $this->faker->text()
         ];

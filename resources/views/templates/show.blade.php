@@ -7,6 +7,12 @@
             <div class="card-header">{{ __('View Email Template') }}</div>
             <div class="card-body">
                     <div class="row mb-3">
+                        <label for="name" class="col-md-2 col-form-label text-md-end">{{ __('Template Name') }}</label>
+                        <div class="col-md-8">
+                            <input id="name" type="text" class="form-control " name="name" readonly value="{{ $template->name }}" autofocus>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
                         <label for="subject" class="col-md-2 col-form-label text-md-end">{{ __('Email Subject') }}</label>
                         <div class="col-md-8">
                             <input id="subject" type="text" class="form-control " name="subject" readonly value="{{ $template->subject }}" autofocus>

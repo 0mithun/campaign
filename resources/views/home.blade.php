@@ -21,6 +21,7 @@
                     <thead>
                         <tr>
                             <th>#</th>
+                            <th>Name</th>
                             <th>Subject</th>
                             <th>Body</th>
                             <th>Action</th>
@@ -30,6 +31,7 @@
                         @forelse ($templates as $template)
                             <tr>
                                 <td>{{ $template->id }}</td>
+                                <td>{{ $template->name }}</td>
                                 <td>{{ $template->subject }}</td>
                                 <td>{{ $template->body }}</td>
                                 <td>

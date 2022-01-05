@@ -30,7 +30,7 @@ class TemplatePolicy
      */
     public function view(User $user, Template $template)
     {
-        //
+        return $user->id === $template->user_id;
     }
 
     /**
