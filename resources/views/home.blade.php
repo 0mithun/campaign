@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="row ">
-    <div class="col-md-10">
+    <div class="col-md-11">
         <div class="card">
             <div class="card-header d-flex justify-content-between">
                 <h3 class="d-inline-block">
@@ -20,11 +20,11 @@
                 <table class="table table-striped">
                     <thead>
                         <tr>
-                            <th>#</th>
-                            <th>Name</th>
-                            <th>Subject</th>
-                            <th>Body</th>
-                            <th>Action</th>
+                            <th width="5%">#</th>
+                            <th width="20%">Name</th>
+                            <th width="20%">Subject</th>
+                            <th width="35%">Body</th>
+                            <th width="20%">Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -35,7 +35,7 @@
                                 <td>{{ $template->subject }}</td>
                                 <td>{{ $template->body }}</td>
                                 <td>
-                                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                    <div class="d-grid gap-2 d-md-flex justify-content-center">
                                         <a class="btn btn-dark" href="{{ route('templates.edit', $template) }}">Edit</a>
                                         <a class="btn btn-success" href="{{ route('templates.show', $template) }}">View</a>
 

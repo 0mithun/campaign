@@ -3,7 +3,7 @@
 
         <ul class="nav nav-pills flex-column mb-auto">
             <li class="nav-item">
-                <a href="{{ route('templates.index') }}" class="nav-link active" aria-current="page">
+                <a href="{{ route('templates.index') }}" class="nav-link @if(request()->routeIs('templates.index')) active @else text-white  @endif" aria-current="page">
                     <svg class="bi me-2" width="16" height="16">
                         <use xlink:href="#home"></use>
                     </svg>
@@ -11,7 +11,7 @@
                 </a>
             </li>
             <li>
-            <a href="{{ route('campaigns.index') }}" class="nav-link text-white">
+                <a href="{{ route('campaigns.index') }}" class="nav-link @if(request()->routeIs('campaigns.index')) active @else text-white @endif">
                     <svg class="bi me-2" width="16" height="16">
                         <use xlink:href="#speedometer2"></use>
                     </svg>
