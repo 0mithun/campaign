@@ -78,8 +78,8 @@
             </div>
         </nav>
 
-        <main class="py-4">
-            <div class="row">
+        <main class="mt-1">
+            <div class="row min-vh-100">
                 @auth
                     @include('partials._sidebar')
                 @endauth

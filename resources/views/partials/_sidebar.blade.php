@@ -1,5 +1,5 @@
 <div class="col-md-2">
-    <div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style="width: 280px;">
+    <div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark h-100" style="width: 280px;">
 
         <ul class="nav nav-pills flex-column mb-auto">
             <li class="nav-item">

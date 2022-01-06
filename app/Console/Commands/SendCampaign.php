@@ -49,10 +49,11 @@ class SendCampaign extends Command
 
         foreach ($todayCampaigns as $campaign) {
             $emails = explode(',', $campaign->emails);
+            $userSetting = UserEmailSetting::where('user_id', $campaign->template->user_id)->first();
 
             foreach ($emails as $email) {
-                Mail::to($email)
-                ->send(new CampaignEmail($campaign->template));
+                Mail::to(trim($email))
+                ->send(new CampaignEmail($campaign->template, $userSetting));
             }
 
             $campaign->decrement('times');

@@ -16,15 +16,17 @@ class CampaignEmail extends Mailable implements ShouldQueue
     use Queueable, SerializesModels;
 
     protected $template;
+    protected $mailSetting;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct(Template $template)
+    public function __construct(Template $template, $mailSetting)
     {
         $this->template = $template;
+        $this->mailSetting = $mailSetting;
     }
 
     /**
@@ -34,10 +36,9 @@ class CampaignEmail extends Mailable implements ShouldQueue
      */
     public function build()
     {
-        $userSetting = UserEmailSetting::where('user_id', $this->template->user_id)->first();
-        $this->configSwiftMailer($userSetting);
+        $this->configSwiftMailer($this->mailSetting);
 
-        return $this->from($userSetting->username)
+        return $this->from(trim($this->mailSetting->username))
             ->markdown('emails.campaign', ['subject'=>$this->template->subject, 'body'=>$this->template->body])
             ->subject($this->template->subject);
     }
