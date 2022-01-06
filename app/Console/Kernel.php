@@ -17,7 +17,7 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')->hourly();
 
-        $schedule->command('send:campaign')->everyFourHours();
+        $schedule->command('send:campaign')->hourly();
     }
 
     /**

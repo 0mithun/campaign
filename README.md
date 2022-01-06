@@ -25,8 +25,9 @@
 - Set your database configration to .env
 - Run `php artisan migrate`
 - If you need demo data run `php artisan db:seed`
-- Set your mail server configuration
 - Set QUEUE_CONNECTION= redis or database
+- Register with your information
+- Save your email server configuration
 - Make sure all configuration correct
 
 

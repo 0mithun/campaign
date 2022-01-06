@@ -23,13 +23,13 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::middleware(['auth'])->group(function () {
-    Route::redirect('/home', 'templates', 301)->name('home');
-
-    Route::resource('templates', TemplateController::class);
-    Route::resource('campaigns', CampaignController::class);
+    Route::middleware(['check_mail_setting'])->group(function () {
+        Route::redirect('/home', 'templates', 301)->name('home');
+        Route::resource('templates', TemplateController::class);
+        Route::resource('campaigns', CampaignController::class);
+    });
 
     Route::get('email-setting',[UserEmailSettingController::class, 'edit'])->name('email.setting.edit');
     Route::put('email-setting', [UserEmailSettingController::class, 'update'])->name('email.setting.update');
-
 });
 

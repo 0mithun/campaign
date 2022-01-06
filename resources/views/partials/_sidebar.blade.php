@@ -7,7 +7,7 @@
                     <svg class="bi me-2" width="16" height="16">
                         <use xlink:href="#home"></use>
                     </svg>
-                    Templates
+                    {{ __('Templates') }}
                 </a>
             </li>
             <li>
@@ -15,8 +15,30 @@
                     <svg class="bi me-2" width="16" height="16">
                         <use xlink:href="#speedometer2"></use>
                     </svg>
-                    Campaigns
+                    {{ __('Campaigns') }}
                 </a>
+            </li>
+            <li>
+                <a href="{{ route('email.setting.edit') }}" class="nav-link @if(request()->routeIs('email.setting.edit')) active @else text-white @endif">
+                    <svg class="bi me-2" width="16" height="16">
+                        <use xlink:href="#speedometer2"></use>
+                    </svg>
+                    {{ __('Email Setting') }}
+                </a>
+            </li>
+            <li>
+                <a class="nav-link text-white" href="{{ route('logout') }}"
+                    onclick="event.preventDefault();
+                                document.getElementById('logout-form').submit();">
+                    <svg class="bi me-2" width="16" height="16">
+                        <use xlink:href="#speedometer2"></use>
+                    </svg>
+                    {{ __('Logout') }}
+                </a>
+
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                    @csrf
+                </form>
             </li>
         </ul>
     </div>
