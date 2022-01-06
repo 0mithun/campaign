@@ -80,7 +80,9 @@
 
         <main class="py-4">
             <div class="row">
-                @include('partials._sidebar')
+                @auth
+                    @include('partials._sidebar')
+                @endauth
                 <div class="col-md-10">
                     @yield('content')
                 </div>

@@ -1,5 +1,4 @@
 @extends('layouts.app')
-
 @section('content')
 <div class="row">
     <div class="col-md-10">
@@ -10,7 +9,7 @@
                     <label for="template_id" class="col-md-2 col-form-label text-md-end">{{ __('Template Name') }}</label>
                     <div class="col-md-8">
                         <select name="template_id" id="template_id" class="form-control" name="template_id" readonly disabled>
-                                <option value=""  selected >{{ $campaign->template->name }}</option>
+                            <option value=""  selected >{{ $campaign->template->name }}</option>
                         </select>
                     </div>
                 </div>

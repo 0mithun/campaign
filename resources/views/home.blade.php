@@ -49,7 +49,7 @@
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="3">No Templates Found.</td>
+                                <td colspan="5" class="text-center">No Templates Found.</td>
                             </tr>
                         @endforelse
                     </tbody>

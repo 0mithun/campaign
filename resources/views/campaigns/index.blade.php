@@ -51,7 +51,7 @@
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="3">No campaigns Found.</td>
+                                <td colspan="6" class="text-center">No campaigns Found.</td>
                             </tr>
                         @endforelse
                     </tbody>
