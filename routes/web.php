@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CampaignController;
+use App\Http\Controllers\DayScheduleController;
 use App\Http\Controllers\TemplateController;
 use App\Http\Controllers\UserEmailSettingController;
 use Illuminate\Support\Facades\Route;
@@ -27,6 +28,8 @@ Route::middleware(['auth'])->group(function () {
         Route::redirect('/home', 'templates', 301)->name('home');
         Route::resource('templates', TemplateController::class);
         Route::resource('campaigns', CampaignController::class);
+
+        Route::resource('days.schedules', DayScheduleController::class)->only(['create','store', 'destroy']);
     });
 
     Route::get('email-setting',[UserEmailSettingController::class, 'edit'])->name('email.setting.edit');

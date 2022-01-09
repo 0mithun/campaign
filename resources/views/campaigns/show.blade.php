@@ -21,7 +21,7 @@
                             <div id="schedule-{{ $loop->iteration }}" class="accordion-collapse collapse @if($loop->iteration == 1) show  @endif" aria-labelledby="headingOne" data-bs-parent="#day-{{ $loop->iteration }}">
                                 <div class="accordion-body">
                                     <div class="d-flex justify-content-end mb-2">
-                                        <a class="btn btn-primary" href="{{ route('campaigns.create') }}">Create New Campaign</a>
+                                        <a class="btn btn-primary" href="{{ route('days.schedules.create', $day) }}">Create New Schedule</a>
                                     </div>
                                     <table class="table table-bordered">
                                         <thead>
@@ -29,6 +29,7 @@
                                                 <th>#</th>
                                                 <th>Template</th>
                                                 <th>Time</th>
+                                                <th>Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -36,11 +37,18 @@
                                                <tr>
                                                    <td>{{ $loop->iteration }}</td>
                                                    <td>{{ $time->template->name }}</td>
-                                                   <td>{{ $time->time }}</td>
+                                                   <td>{{ $time->time_formated }}</td>
+                                                   <td>
+                                                        <form method="POST" action="{{ route('days.schedules.destroy', [$day->id, $time->id]) }}" onsubmit="return confirm('Are you sure?')">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="submit" class="btn btn-danger">Delete</button>
+                                                        </form>
+                                                   </td>
                                                </tr>
                                            @empty
                                                <tr>
-                                                   <td colspan="3">No Schedule Found...</td>
+                                                   <td colspan="4">No Schedule Found...</td>
                                                </tr>
                                            @endforelse
                                         </tbody>

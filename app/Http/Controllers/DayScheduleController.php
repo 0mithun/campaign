@@ -4,28 +4,22 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreDayScheduleRequest;
 use App\Http\Requests\UpdateDayScheduleRequest;
+use App\Models\CampaignDay;
 use App\Models\DaySchedule;
+use App\Models\Template;
 
 class DayScheduleController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(CampaignDay $day)
     {
-        //
+        $templates = Template::where('user_id', auth()->id())->get();
+
+        return view('schedules.create', compact('day', 'templates'));
     }
 
     /**
@@ -34,43 +28,11 @@ class DayScheduleController extends Controller
      * @param  \App\Http\Requests\StoreDayScheduleRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreDayScheduleRequest $request)
+    public function store(CampaignDay $day, StoreDayScheduleRequest $request)
     {
-        //
-    }
+        $day->times()->create($request->validated());
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\DaySchedule  $daySchedule
-     * @return \Illuminate\Http\Response
-     */
-    public function show(DaySchedule $daySchedule)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\DaySchedule  $daySchedule
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(DaySchedule $daySchedule)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateDayScheduleRequest  $request
-     * @param  \App\Models\DaySchedule  $daySchedule
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdateDayScheduleRequest $request, DaySchedule $daySchedule)
-    {
-        //
+        return redirect()->route('campaigns.show', $day->campaign_id)->with('success','Schedule create successfully!');
     }
 
     /**
@@ -79,8 +41,11 @@ class DayScheduleController extends Controller
      * @param  \App\Models\DaySchedule  $daySchedule
      * @return \Illuminate\Http\Response
      */
-    public function destroy(DaySchedule $daySchedule)
+    public function destroy(CampaignDay $day, DaySchedule $schedule)
     {
-        //
+        // return $schedule;
+        $schedule->delete();
+
+        return redirect()->route('campaigns.show', $day->campaign_id)->with('success','Schedule delete successfully!');
     }
 }

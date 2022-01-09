@@ -13,7 +13,7 @@ class StoreDayScheduleRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,21 @@ class StoreDayScheduleRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'time'          =>  ['required'],
+            'template_id'          =>  ['required','exists:templates,id'],
+        ];
+    }
+
+
+    /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return array
+     */
+    public function messages()
+    {
+        return [
+            'template_id.required' => 'Template field is required',
         ];
     }
 }

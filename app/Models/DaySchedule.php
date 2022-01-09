@@ -2,9 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class DaySchedule extends Model
 {
@@ -27,6 +28,13 @@ class DaySchedule extends Model
     public function day()
     {
         return $this->belongsTo(CampaignDay::class,'day_id','id');
+    }
+
+    public function getTimeFormatedAttribute()
+    {
+        $time = Carbon::createFromTimeString($this->time);
+
+        return $time->format('h:i A');
     }
 
 }
