@@ -4,9 +4,11 @@ namespace App\Console\Commands;
 
 use App\Models\Campaign;
 use App\Mail\CampaignEmail;
+use App\Models\DaySchedule;
 use Illuminate\Support\Carbon;
 use Illuminate\Console\Command;
 use App\Models\UserEmailSetting;
+use Database\Seeders\CampaignSeeder;
 use Illuminate\Support\Facades\Mail;
 
 class SendCampaign extends Command
@@ -42,21 +44,25 @@ class SendCampaign extends Command
      */
     public function handle()
     {
-        $todayCampaigns = Campaign::with('template')
-            ->whereDate('date', Carbon::today())
-            ->where('times','>', 0)
-            ->get();
+        $time = $time = Carbon::parse(now())->toTimeString();
 
-        foreach ($todayCampaigns as $campaign) {
-            $emails = explode(',', $campaign->emails);
-            $userSetting = UserEmailSetting::where('user_id', $campaign->template->user_id)->first();
+        $times = DaySchedule::whereHas('day', function($q){
+            $q->whereDate('date', Carbon::today());
+        })
+        ->whereTime('time','>=', $time)
+        ->where('is_complete', 0)
+        ->with('template','day.campaign')
+        ->get();
+
+        foreach ($times as $time) {
+            $emails = explode(',', $time->day->campaign->emails);
+            $userSetting = UserEmailSetting::where('user_id', $time->day->campaign->user_id)->first();
 
             foreach ($emails as $email) {
                 Mail::to(trim($email))
-                ->send(new CampaignEmail($campaign->template, $userSetting));
+                ->send(new CampaignEmail($time->template, $userSetting));
             }
-
-            $campaign->decrement('times');
+            $time->update(['is_complete'=> 1]);
         }
     }
 }

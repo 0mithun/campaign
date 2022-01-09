@@ -18,6 +18,7 @@ class CreateDaySchedulesTable extends Migration
             $table->foreignId('day_id')->constrained('campaign_days')->cascadeOnDelete();
             $table->foreignId('template_id')->constrained()->cascadeOnDelete();
             $table->time('time');
+            $table->boolean('is_complete')->default(false);
             $table->timestamps();
         });
     }
