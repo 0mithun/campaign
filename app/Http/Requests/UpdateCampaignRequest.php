@@ -25,9 +25,9 @@ class UpdateCampaignRequest extends FormRequest
     public function rules()
     {
         return [
-            'template_id'       =>  ['required','exists:templates,id'],
-            'date'              =>  ['required','date',],
-            'times'             =>  ['required','numeric','min:1'],
+            'name'              =>  ['required',],
+            'start_date'              =>  ['required','date',],
+            'how_many_days'             =>  ['required','numeric','min:1'],
             'emails'            =>  ['required', new CheckValidEmails]
         ];
     }

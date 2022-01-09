@@ -21,10 +21,10 @@
                     <thead>
                         <tr>
                             <th>#</th>
-                            <th width="20%">Template Name</th>
+                            <th width="20%">Name</th>
                             <th width="30%">Emails</th>
-                            <th width="20%">Date</th>
-                            <th width="5%">Times</th>
+                            <th width="20%">Start Date</th>
+                            <th width="5%">How Many Days?</th>
                             <th width="25%">Action</th>
                         </tr>
                     </thead>
@@ -32,10 +32,10 @@
                         @forelse ($campaigns as $campaign)
                             <tr>
                                 <td>{{ $campaign->id }}</td>
-                                <td>{{ $campaign->template->name }}</td>
+                                <td>{{ $campaign->name }}</td>
                                 <td>{{ $campaign->emails }}</td>
-                                <td>{{ $campaign->date->format('d-F-Y') }}</td>
-                                <td>{{ $campaign->times }}</td>
+                                <td>{{ $campaign->start_date->format('d-F-Y') }}</td>
+                                <td>{{ $campaign->how_many_days }}</td>
                                 <td>
                                     <div class="d-grid gap-2 d-md-flex justify-content-center">
                                         <a class="btn btn-dark" href="{{ route('campaigns.edit', $campaign) }}">Edit</a>

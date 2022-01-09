@@ -16,7 +16,7 @@ class CampaignController extends Controller
      */
     public function index()
     {
-        $campaigns = Campaign::with('template:id,name')->where('user_id', auth()->id())->paginate();
+        $campaigns = Campaign::where('user_id', auth()->id())->paginate();
 
         return view('campaigns.index', compact('campaigns'));
     }
@@ -28,9 +28,7 @@ class CampaignController extends Controller
      */
     public function create()
     {
-        $templates = Template::where('user_id', auth()->id())->get();
-
-        return view('campaigns.create', compact('templates'));
+        return view('campaigns.create');
     }
 
     /**
@@ -70,9 +68,7 @@ class CampaignController extends Controller
     {
         $this->authorize('update', $campaign);
 
-        $templates = Template::where('user_id', auth()->id())->get();
-
-        return view('campaigns.edit', compact('templates', 'campaign'));
+        return view('campaigns.edit', compact('campaign'));
     }
 
     /**

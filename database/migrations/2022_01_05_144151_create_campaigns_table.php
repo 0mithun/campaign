@@ -16,9 +16,10 @@ class CreateCampaignsTable extends Migration
         Schema::create('campaigns', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->foreignId('template_id')->constrained()->onDelete('cascade');
-            $table->date('date');
-            $table->unsignedInteger('times')->default(1);
+            $table->string('name');
+            // $table->foreignId('template_id')->constrained()->onDelete('cascade');
+            $table->date('start_date');
+            $table->unsignedInteger('how_many_days')->default(1);
             $table->text('emails');
             $table->timestamps();
         });

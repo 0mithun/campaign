@@ -11,15 +11,10 @@
                     @csrf
                     @method('PUT')
                     <div class="row mb-3">
-                        <label for="template_id" class="col-md-2 col-form-label text-md-end">{{ __('Template Name') }}</label>
-
+                        <label for="name" class="col-md-2 col-form-label text-md-end">{{ __('Campaign Name') }}</label>
                         <div class="col-md-8">
-                            <select name="template_id" id="template_id" class="form-control @error('template_id') is-invalid @enderror" name="template_id">
-                                @foreach ($templates as $template)
-                                    <option value="{{ $template->id }}" @if ($template->id === $campaign->template_id) selected @endif >{{ $template->name }}</option>
-                                @endforeach
-                            </select>
-                            @error('template_id')
+                            <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ $campaign->name }}" >
+                            @error('name')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
@@ -27,10 +22,10 @@
                         </div>
                     </div>
                     <div class="row mb-3">
-                        <label for="date" class="col-md-2 col-form-label text-md-end">{{ __('Campaign Date') }}</label>
+                        <label for="start_date" class="col-md-2 col-form-label text-md-end">{{ __('Start Date') }}</label>
                         <div class="col-md-8">
-                            <input id="date" type="date" class="form-control @error('date') is-invalid @enderror" name="date" value="{{ $campaign->date->format('Y-m-d') }}" >
-                            @error('date')
+                            <input id="start_date" type="date" class="form-control @error('start_date') is-invalid @enderror" name="start_date" value="{{ $campaign->start_date->format('Y-m-d') }}" >
+                            @error('start_date')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
@@ -38,10 +33,10 @@
                         </div>
                     </div>
                     <div class="row mb-3">
-                        <label for="times" class="col-md-2 col-form-label text-md-end">{{ __('Times') }}</label>
+                        <label for="how_many_days" class="col-md-2 col-form-label text-md-end">{{ __('How Many Days?') }}</label>
                         <div class="col-md-8">
-                            <input id="times" type="number" min="1" class="form-control @error('times') is-invalid @enderror" name="times" value="{{ $campaign->times }}" >
-                            @error('times')
+                            <input id="how_many_days" type="number" min="1" class="form-control @error('how_many_days') is-invalid @enderror" name="how_many_days" value="{{ $campaign->how_many_days }}" >
+                            @error('how_many_days')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>

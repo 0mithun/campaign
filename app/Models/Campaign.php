@@ -11,18 +11,12 @@ class Campaign extends Model
     use HasFactory;
 
     protected $fillable = [
-        'user_id', 'template_id', 'date', 'times', 'emails'
+        'user_id','name', 'start_date', 'how_many_days', 'emails'
     ];
 
     protected $casts = [
-        'date'  =>  'date'
+        'start_date'  =>  'date'
     ];
-
-
-    public function template(): BelongsTo
-    {
-        return $this->belongsTo(Template::class);
-    }
 
     public function user(): BelongsTo
     {

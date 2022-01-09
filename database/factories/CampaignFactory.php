@@ -22,9 +22,9 @@ class CampaignFactory extends Factory
 
         return [
             'user_id'       =>  User::inRandomOrder()->first()->id,
-            'template_id'   =>  Template::inRandomOrder()->first()->id,
-            'date'          => $this->faker->date(),
-            'times'         => $this->faker->numberBetween(1,5),
+            'name'       =>  $this->faker->sentence(),
+            'start_date'          => $this->faker->date(),
+            'how_many_days'         => $this->faker->numberBetween(1,5),
             'emails'        =>  join(',', $emails)
         ];
     }
