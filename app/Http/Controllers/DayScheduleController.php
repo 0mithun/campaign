@@ -43,7 +43,6 @@ class DayScheduleController extends Controller
      */
     public function destroy(CampaignDay $day, DaySchedule $schedule)
     {
-        // return $schedule;
         $schedule->delete();
 
         return redirect()->route('campaigns.show', $day->campaign_id)->with('success','Schedule delete successfully!');

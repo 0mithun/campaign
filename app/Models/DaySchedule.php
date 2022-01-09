@@ -25,7 +25,7 @@ class DaySchedule extends Model
         return $this->belongsTo(Template::class);
     }
 
-    public function day()
+    public function day(): BelongsTo
     {
         return $this->belongsTo(CampaignDay::class,'day_id','id');
     }
