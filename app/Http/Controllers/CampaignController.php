@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreCampaignRequest;
 use App\Http\Requests\UpdateCampaignRequest;
 use App\Models\Campaign;
+use App\Models\CampaignDay;
 use App\Models\Template;
+use Carbon\Carbon;
 
 class CampaignController extends Controller
 {
@@ -39,7 +41,16 @@ class CampaignController extends Controller
      */
     public function store(StoreCampaignRequest $request)
     {
-        auth()->user()->campaigns()->create($request->validated());
+        $campaign = auth()->user()->campaigns()->create($request->validated());
+
+        $date = Carbon::parse($request->start_date);
+        for ($i=0; $i< $request->how_many_days;  $i++) {
+            $campaign->days()->create([
+                    'date'  =>  $date,
+            ]);
+
+            $date = $date->addDay();
+        }
 
         return redirect()->route('campaigns.index')->with('success','Campaign create successfully!');
     }
@@ -53,9 +64,10 @@ class CampaignController extends Controller
     public function show(Campaign $campaign)
     {
         $this->authorize('view', $campaign);
-        $campaign->load('template');
 
-        return view('campaigns.show', compact('campaign'));
+        $days = CampaignDay::where('campaign_id', $campaign->id)->paginate();
+
+        return view('campaigns.show', compact('campaign', 'days'));
     }
 
     /**
@@ -83,6 +95,16 @@ class CampaignController extends Controller
         $this->authorize('update', $campaign);
 
         $campaign->update($request->except('user_id'));
+
+
+        $date = Carbon::parse($request->start_date);
+        for ($i=0; $i< $request->how_many_days;  $i++) {
+            $campaign->days()->create([
+                    'date'  =>  $date,
+            ]);
+
+            $date = $date->addDay();
+        }
 
         return redirect()->route('campaigns.index')->with('success','Campaign update successfully!');
     }
