@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="row ">
-    <div class="col-md-11">
+    <div class="col-md-12">
         <div class="card">
             <div class="card-header d-flex justify-content-between">
                 <h3 class="d-inline-block">
@@ -20,18 +20,16 @@
                 <table class="table table-striped">
                     <thead>
                         <tr>
-                            <th>#</th>
-                            <th width="20%">Name</th>
-                            <th width="30%">Emails</th>
-                            <th width="20%">Start Date</th>
-                            <th width="5%">How Many Days?</th>
-                            <th width="25%">Action</th>
+                            <th style="width:15%;">Name</th>
+                            <th style="width:45%;">Emails</th>
+                            <th style="width:15%;">Start Date</th>
+                            <th style="width:5%;">Days</th>
+                            <th style="width:20%;">Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         @forelse ($campaigns as $campaign)
                             <tr>
-                                <td>{{ $campaign->id }}</td>
                                 <td>{{ $campaign->name }}</td>
                                 <td>{{ $campaign->emails }}</td>
                                 <td>{{ $campaign->start_date->format('d-F-Y') }}</td>
@@ -39,7 +37,7 @@
                                 <td>
                                     <div class="d-grid gap-2 d-md-flex justify-content-center">
                                         <a class="btn btn-dark" href="{{ route('campaigns.edit', $campaign) }}">Edit</a>
-                                        <a class="btn btn-success" href="{{ route('campaigns.show', $campaign) }}">View</a>
+                                        <a class="btn btn-success" href="{{ route('campaigns.show', $campaign) }}">Set Schedule</a>
 
                                         <form method="POST" action="{{ route('campaigns.destroy', $campaign) }}" onsubmit="return confirm('Are you sure?')">
                                             @csrf

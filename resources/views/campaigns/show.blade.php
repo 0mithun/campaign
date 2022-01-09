@@ -21,7 +21,15 @@
                                     <a class="btn btn-primary btn-sm" href="{{ route('days.schedules.create', $day) }}">Create New Schedule</a>
                                 </div>
                                 <table class="table">
-                                    @forelse ($day->times as $time)
+                                    <thead>
+                                        <tr>
+                                            <th>Template Name</th>
+                                            <th>Time</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @forelse ($day->times as $time)
                                         <tr>
                                             <td>{{ $time->template->name }}</td>
                                             <td>{{ $time->time_formated }}</td>
@@ -33,11 +41,12 @@
                                                 </form>
                                             </td>
                                         </tr>
-                                    @empty
+                                        @empty
                                         <tr>
-                                            <td colspan="4" class="text-center">No Schedule Found...</td>
+                                            <td colspan="4" class="text-center">No Schedule Found.</td>
                                         </tr>
-                                    @endforelse
+                                        @endforelse
+                                    </tbody>
                                 </table>
                             </div>
                         </div>
