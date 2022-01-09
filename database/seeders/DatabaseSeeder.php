@@ -16,5 +16,6 @@ class DatabaseSeeder extends Seeder
         \App\Models\User::factory(10)->create();
         $this->call(TemplateSeeder::class);
         $this->call(CampaignSeeder::class);
+        $this->call(DayScheduleSeeder::class);
     }
 }

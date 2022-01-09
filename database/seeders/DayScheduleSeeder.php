@@ -2,10 +2,10 @@
 
 namespace Database\Seeders;
 
+use App\Models\DaySchedule;
 use Illuminate\Database\Seeder;
-use App\Models\Template;
 
-class TemplateSeeder extends Seeder
+class DayScheduleSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,6 +14,6 @@ class TemplateSeeder extends Seeder
      */
     public function run()
     {
-        Template::factory(20)->create();
+        DaySchedule::factory(20)->create();
     }
 }

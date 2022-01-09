@@ -2,10 +2,11 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Carbon;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Campaign extends Model
 {
@@ -23,6 +24,24 @@ class Campaign extends Model
             $campaign->days()->each(function($day){
                 $day->delete();
             });
+        });
+        static::updated(function($campaign){
+            $date = Carbon::parse($campaign->start_date);
+            for ($i=0; $i< $campaign->how_many_days;  $i++) {
+                $campaign->days()->create([
+                        'date'  =>  $date,
+                ]);
+                $date = $date->addDay();
+            }
+        });
+        static::created(function($campaign){
+            $date = Carbon::parse($campaign->start_date);
+            for ($i=0; $i< $campaign->how_many_days;  $i++) {
+                $campaign->days()->create([
+                        'date'  =>  $date,
+                ]);
+                $date = $date->addDay();
+            }
         });
     }
 
@@ -45,5 +64,9 @@ class Campaign extends Model
     }
 
 
+    public function times()
+    {
+        return $this->hasManyThrough(DaySchedule::class, CampaignDay::class,'campaign_id','day_id');
+    }
 
 }
