@@ -11,7 +11,7 @@
                     @csrf
                     <div class="row mb-3">
                         <label for="template_id" class="col-md-2 col-form-label text-md-end">{{ __('Template Name') }}</label>
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <select name="template_id" id="template_id" class="form-control @error('template_id') is-invalid @enderror" name="template_id">
                                 <option value="" selected>Please select template...</option>
                                 @foreach ($templates as $template)
@@ -27,7 +27,7 @@
                     </div>
                     <div class="row mb-3">
                         <label for="time" class="col-md-2 col-form-label text-md-end">{{ __('Time') }}</label>
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <input id="time" type="time" class="form-control @error('time') is-invalid @enderror" name="time" value="{{ old('time') }}" >
                             @error('time')
                                 <span class="invalid-feedback" role="alert">
@@ -42,6 +42,9 @@
                             <button type="submit" class="btn btn-primary">
                                 {{ __('Create Schedule') }}
                             </button>
+                            <a href="{{ route('campaigns.show', $day->campaign_id) }}" class="btn btn-danger">
+                                {{ __('Cancel') }}
+                            </a>
                         </div>
                     </div>
                 </form>

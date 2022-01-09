@@ -19,7 +19,7 @@ class DayScheduleController extends Controller
     {
         $templates = Template::where('user_id', auth()->id())->get();
 
-        return view('schedules.create', compact('day', 'templates'));
+        return view('schedules.create', compact('day', 'templates',));
     }
 
     /**

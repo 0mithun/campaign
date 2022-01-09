@@ -10,53 +10,38 @@
                             {{ session('success') }}clear
                         </div>
                     @endif
+
                     @forelse ($days as $day)
-                        <div class="accordion" id="day-{{ $loop->iteration }}">
-                            <div class="accordion-item">
-                            <h2 class="accordion-header" id="heading-{{ $loop->iteration }}">
-                                <button class="accordion-button @if($loop->iteration !== 1) collapsed  @endif" type="button" data-bs-toggle="collapse" data-bs-target="#schedule-{{ $loop->iteration }}" aria-expanded="true" aria-controls="schedule-{{ $loop->iteration }}">
-                                    {{ $day->date->format('d-M-Y') }}
-                                </button>
-                            </h2>
-                            <div id="schedule-{{ $loop->iteration }}" class="accordion-collapse collapse @if($loop->iteration == 1) show  @endif" aria-labelledby="headingOne" data-bs-parent="#day-{{ $loop->iteration }}">
-                                <div class="accordion-body">
-                                    <div class="d-flex justify-content-end mb-2">
-                                        <a class="btn btn-primary" href="{{ route('days.schedules.create', $day) }}">Create New Schedule</a>
-                                    </div>
-                                    <table class="table table-bordered">
-                                        <thead>
-                                            <tr>
-                                                <th>#</th>
-                                                <th>Template</th>
-                                                <th>Time</th>
-                                                <th>Action</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                           @forelse ($day->times as $time)
-                                               <tr>
-                                                   <td>{{ $loop->iteration }}</td>
-                                                   <td>{{ $time->template->name }}</td>
-                                                   <td>{{ $time->time_formated }}</td>
-                                                   <td>
-                                                        <form method="POST" action="{{ route('days.schedules.destroy', [$day->id, $time->id]) }}" onsubmit="return confirm('Are you sure?')">
-                                                            @csrf
-                                                            @method('DELETE')
-                                                            <button type="submit" class="btn btn-danger">Delete</button>
-                                                        </form>
-                                                   </td>
-                                               </tr>
-                                           @empty
-                                               <tr>
-                                                   <td colspan="4">No Schedule Found...</td>
-                                               </tr>
-                                           @endforelse
-                                        </tbody>
-                                    </table>
-                                </div>
+                        <div class="row mb-5">
+                            <div class="col-md-3">
+                                Day {{ $loop->iteration }} {{ $day->date->format('d-M-Y') }}
                             </div>
+                            <div class="col-md-5">
+                                <div class="d-flex justify-content-end mb-2">
+                                    <a class="btn btn-primary btn-sm" href="{{ route('days.schedules.create', $day) }}">Create New Schedule</a>
+                                </div>
+                                <table class="table">
+                                    @forelse ($day->times as $time)
+                                        <tr>
+                                            <td>{{ $time->template->name }}</td>
+                                            <td>{{ $time->time_formated }}</td>
+                                            <td>
+                                                <form method="POST" action="{{ route('days.schedules.destroy', [$day->id, $time->id]) }}" onsubmit="return confirm('Are you sure?')">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    @empty
+                                        <tr>
+                                            <td colspan="4" class="text-center">No Schedule Found...</td>
+                                        </tr>
+                                    @endforelse
+                                </table>
                             </div>
                         </div>
+                        <br>
                     @empty
                         <p colspan="6" class="text-center">No days Found.</p>
                     @endforelse
